@@ -170,11 +170,15 @@ has `[data-deck]`, so the chrome lives in one place. The grid rows are pinned in
 `assets/js/console.js`.** Each entry is `[label, file, icon]`; the icon is a Font
 Awesome name. `data-up` handles subdirectory paths.
 
-One thing *does* need touching: the phone menu is a fixed grid in the PHONE
-block of `console.css` — four columns, two rows, with `--nav` set to 88px for
-exactly eight switches. A ninth entry opens a third row inside that same height
-and every switch gets a third shorter; raise `--nav` with it. (Eight in a single
-row was tried first and was a crowd: labels touching their cell borders.)
+Each entry ends with an **active** flag. `false` leaves the item out of the menu on
+every page but keeps the page itself reachable by URL — that is how `/merch` is
+parked while the shop has nothing real to sell.
+
+The phone menu picks its layout from the active count, in `console.js`, by setting
+`data-nav-rows` on `<html>`: up to seven switches sit in one row (auto-flow columns,
+so the count is never hard-coded), eight or more go two rows of four with `--nav`
+doubled to 88px. Both live in the PHONE block of `console.css`. Nine or more would
+open a third row inside the same height — raise `--nav` with it.
 
 ### Components in `console.css`
 

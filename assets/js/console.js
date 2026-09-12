@@ -10,20 +10,24 @@
      Injected from here so twenty pages don't each carry a copy of the
      rails. The grid rows are pinned in CSS, so nothing shifts while
      this runs. */
-  /* label, file, Font Awesome glyph */
+  /* label, file, Font Awesome glyph, active.
+     An inactive entry is left out of the menu on every page but keeps its
+     page reachable by URL — that is how /merch is parked right now. */
   var NAV = [
-    ['/home',    'index.html',   'fa-house'],
-    ['/team',    'team.html',    'fa-users'],
-    ['/events',  'events.html',  'fa-calendar-days'],
-    ['/blogs',   'blogs.html',   'fa-feather'],
-    ['/hangar',  'hangar.html',  'fa-screwdriver-wrench'],
-    ['/merch',   'merch.html',   'fa-tag'],
-    ['/journal', 'newsletter.html', 'fa-newspaper'],
-    ['/archive', 'archive.html', 'fa-box-archive']
-  ];
-  /* Adding an entry here? The phone menu is a fixed grid in the PHONE block
-     of console.css — four columns, two rows, --nav sized for exactly that.
-     A ninth entry opens a third row inside the same height; bump --nav too. */
+    ['/home',    'index.html',      'fa-house',             true],
+    ['/team',    'team.html',       'fa-users',             true],
+    ['/events',  'events.html',     'fa-calendar-days',     true],
+    ['/blogs',   'blogs.html',      'fa-feather',           true],
+    ['/hangar',  'hangar.html',     'fa-screwdriver-wrench', true],
+    ['/merch',   'merch.html',      'fa-tag',               false],
+    ['/journal', 'newsletter.html', 'fa-newspaper',         true],
+    ['/archive', 'archive.html',    'fa-box-archive',       true]
+  ].filter(function (n) { return n[3]; });
+  /* The phone menu has two layouts, chosen by how many are active: up to
+     seven sit in one row of equal switches; eight or more go two rows of
+     four. The PHONE block of console.css keys both off data-nav-rows on
+     <html>, set here, so the count is decided in exactly one place. */
+  document.documentElement.setAttribute('data-nav-rows', NAV.length > 7 ? '2' : '1');
 
   var deck = document.querySelector('[data-deck]');
 
@@ -95,22 +99,25 @@
     var LINES = [
       { t: 'codingclub@iisertvm:~$ status --club', c: 'cmd' },
       { t: '' },
-      { t: '  members .............. 40+ active', c: 'out' },
-      { t: '  projects ............. 3+ running', c: 'out' },
-      { t: '  courses .............. web development, 16 sessions', c: 'out' },
+      { t: '  members .............. 20+ active', c: 'out' },
+      { t: '  passion projects ..... 4+ running', c: 'out' },
+      { t: '  events this year ..... 4 workshops, 1 course', c: 'out' },
+      { t: '                         3 talks, 3 sessions', c: 'out' },
+      { t: '                         1 hackathon, 1 games night', c: 'out' },
       { t: '  writing .............. 9 posts, 6 authors', c: 'out' },
-      { t: '  talk series .......... Beyond Syntax, ongoing', c: 'out' },
-      { t: '  next meeting ......... CDH2 meeting room, 20:30', c: 'out' },
+      { t: '  newsletter ........... the MANIAC, edition I out', c: 'out' },
+      { t: '  next event ........... fresher\'s orientation 17:00', c: 'hi' },
       { t: '' },
       { t: '  applications ......... CLOSED for now', c: 'out' },
+      { t: '  crew recruitment ..... OPEN', c: 'hi' },
       { t: '  passion projects ..... OPEN', c: 'hi' },
       { t: '' },
-      { t: 'codingclub@iisertvm:~$ whoami', c: 'cmd' },
-      { t: '  a student club at IISER Thiruvananthapuram building', c: 'out' },
-      { t: '  things in machine learning, AI and the web.', c: 'out' },
-      { t: '' },
-      { t: '  any student can propose a project or run an event', c: 'out' },
-      { t: '  under the club. passion projects are open to all.', c: 'out' },
+      { t: 'codingclub@iisertvm:~$ whoarewe', c: 'cmd' },
+      { t: '  We are the crew who believe coding is more than', c: 'out' },
+      { t: '  just writing programs—we explore its applications', c: 'out' },
+      { t: '  across disciplines, uncovering how data is woven', c: 'out' },
+      { t: '  into everything around us and learning to find,', c: 'out' },
+      { t: '  understand, and use it in a variety of ways.', c: 'out' },
       { t: '' },
       { t: 'codingclub@iisertvm:~$ ', c: 'cmd', caret: true }
     ];
