@@ -2459,6 +2459,10 @@ button.manifest__row:focus-visible { outline: 1px solid var(--violet); outline-o
 
   .tabs { display: grid; grid-template-columns: repeat(3, 1fr); }
   .tabs--four { grid-template-columns: repeat(2, 1fr); }   /* 2 x 2, not 3 + 1 */
+  /* the strip only draws verticals between switches; two rows need the rule
+     between them too, or the top pair floats over the bottom pair */
+  .tabs--four .tabs__btn:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+  .tabs--four .tabs__btn:nth-child(2n) { border-right: 0; }
   .tabs__btn { padding: 0.75rem 0.5rem; font-size: 0.625rem; }
   .tabs__n { display: none; }
 
