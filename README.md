@@ -94,11 +94,12 @@ the version from 5 October 2025; the redesign is unpushed local work.
 
 ```
 .
-│   The seven pages in the menu bar:
+│   The eight pages in the menu bar:
 ├── index.html              Home: masthead, live terminal readout, focus areas, FAQ, contact
 ├── team.html               On station / ground control / alumni, links to each profile
 ├── events.html             Scheduled talks, workshops, seminars, the hackathon
 ├── blogs.html              Index of member-written posts
+├── hangar.html             Projects: the passion-project form first, then what is in build
 ├── merch.html              Merch catalogue (placeholder products — see below)
 ├── newsletter.html         The issue: contents, contact sheet, and the page reader
 ├── archive.html            The record: what the club has run, plus material to download
@@ -169,11 +170,11 @@ has `[data-deck]`, so the chrome lives in one place. The grid rows are pinned in
 `assets/js/console.js`.** Each entry is `[label, file, icon]`; the icon is a Font
 Awesome name. `data-up` handles subdirectory paths.
 
-One thing *does* need touching: the phone menu is a fixed column count in the
-PHONE block of `console.css` (`repeat(7, 1fr)` today). Add an eighth entry without
-changing it and one switch wraps onto a second row. The label length matters at
-that size too — `/newsletter` ellipsised at seven columns; `/journal` is the same
-eight characters as `/archive` and fits.
+One thing *does* need touching: the phone menu is a fixed grid in the PHONE
+block of `console.css` — four columns, two rows, with `--nav` set to 88px for
+exactly eight switches. A ninth entry opens a third row inside that same height
+and every switch gets a third shorter; raise `--nav` with it. (Eight in a single
+row was tried first and was a crowd: labels touching their cell borders.)
 
 ### Components in `console.css`
 
@@ -282,6 +283,29 @@ hues so they stay legible on black.
 Grids draw their hairlines with `outline` on the cells, **not** with a background
 colour on the container. A container background shows through any unfilled cell in
 the last row as a large pale block.
+
+---
+
+## hangar.html — passion projects
+
+The intake form is a Tally form (`https://tally.so/r/jajx1R`), owned by the club
+account, opened in a new tab from the callout. It branches on what is being proposed
+— a project, a talk, an event, or something else — and is written for first-years:
+no jargon, every open question shows what "enough" looks like, and it asks for
+comfort level and available time so a newcomer can be paired with the right people.
+
+The header image is `assets/img/brand/passion-projects-cover.png`, which Tally loads
+from GitHub Pages at render time — so it only shows once that file is deployed.
+
+The form was built through Tally's API. Two things that cost an hour to learn:
+
+- `CHECKBOX` blocks take `groupType: "CHECKBOXES"`, not `"CHECKBOX"`.
+- Publishing with a status-only `PATCH` leaves the draft blocks uncompiled: the form
+  reports zero questions and the public URL returns 500. Resend the blocks with the
+  status change and it works.
+
+The active-projects list used to sit at the foot of `events.html`, where nobody saw
+the form. Both now live here, form first.
 
 ---
 

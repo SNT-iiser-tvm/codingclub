@@ -16,14 +16,14 @@
     ['/team',    'team.html',    'fa-users'],
     ['/events',  'events.html',  'fa-calendar-days'],
     ['/blogs',   'blogs.html',   'fa-feather'],
+    ['/hangar',  'hangar.html',  'fa-screwdriver-wrench'],
     ['/merch',   'merch.html',   'fa-tag'],
     ['/journal', 'newsletter.html', 'fa-newspaper'],
     ['/archive', 'archive.html', 'fa-box-archive']
   ];
-  /* Adding an entry here? The phone menu is a fixed column count in the PHONE
-     block of console.css — seven switches, seven columns. It also sets the
-     label width: '/newsletter' ellipsised at seven columns; '/journal' is the
-     same eight characters as '/archive' and fits. */
+  /* Adding an entry here? The phone menu is a fixed grid in the PHONE block
+     of console.css — four columns, two rows, --nav sized for exactly that.
+     A ninth entry opens a third row inside the same height; bump --nav too. */
 
   var deck = document.querySelector('[data-deck]');
 
